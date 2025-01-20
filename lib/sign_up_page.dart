@@ -52,6 +52,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
   void togglePassword() {
     isObscure = !isObscure;
+    isObscureConfirmation = !isObscureConfirmation;
     setState(() {});
   }
 
