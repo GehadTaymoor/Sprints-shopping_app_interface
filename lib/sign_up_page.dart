@@ -129,7 +129,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     labelText: 'Confirm Password',
                     suffixIcon: IconButton(
                         onPressed: () {
-                          togglePassword();
+                          togglePasswordConfirmation();
                         },
                         icon: Icon(isObscureConfirmation
                             ? Icons.remove_red_eye
