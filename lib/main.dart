@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sprints_shopping_app/main_screen.dart';
+import 'package:sprints_shopping_app/sign_up_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MainScreen(),
+      home: const SignUpPage(),
     );
   }
 }
