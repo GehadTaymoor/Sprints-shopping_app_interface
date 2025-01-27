@@ -40,7 +40,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       );
                     },
                     transitionDuration:
-                    const Duration(milliseconds: 500), // Customize duration
+                    const Duration(seconds : 10), // Customize duration
                   ),
                 );
               },
