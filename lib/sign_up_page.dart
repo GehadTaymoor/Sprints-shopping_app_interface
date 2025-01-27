@@ -22,29 +22,38 @@ class _SignUpPageState extends State<SignUpPage> {
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
-          title: Text('Success'),
-          content: Text('Account created successfully!'),
+          title: const Text('Success'),
+          content: const Text('Account created successfully!'),
           actions: [
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop(); // Close the dialog
                 Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(
-                    builder: (context) =>
-                        MainScreen(), // Navigate to shopping screen
+                  PageRouteBuilder(
+                    pageBuilder: (context, animation, secondaryAnimation) =>
+                        MainScreen(),
+                    transitionsBuilder:
+                        (context, animation, secondaryAnimation, child) {
+                      return FadeTransition(
+                        opacity: animation,
+                        child: child,
+                      );
+                    },
+                    transitionDuration:
+                    const Duration(milliseconds: 500), // Customize duration
                   ),
                 );
               },
-              child: Text('Close'),
+              child: const Text('Close'),
             ),
           ],
         ),
       );
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
           content: Text('Please fix the errors in the form.'),
-          duration: Duration(seconds: 2),
+          duration: Duration(seconds: 10),
         ),
       );
     }
@@ -67,7 +76,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Sign Up'),
+        title: const Text('Sign Up'),
       ),
       body: Padding(
         padding: EdgeInsets.all(screenWidth * 0.05),
@@ -77,7 +86,7 @@ class _SignUpPageState extends State<SignUpPage> {
             children: [
               TextFormField(
                 controller: _fullNameController,
-                decoration: InputDecoration(labelText: 'Full Name'),
+                decoration: const InputDecoration(labelText: 'Full Name'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Full name is required';
@@ -90,7 +99,7 @@ class _SignUpPageState extends State<SignUpPage> {
               SizedBox(height: screenHeight * 0.02),
               TextFormField(
                 controller: _emailController,
-                decoration: InputDecoration(labelText: 'Email'),
+                decoration: const InputDecoration(labelText: 'Email'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Email is required';
@@ -104,14 +113,16 @@ class _SignUpPageState extends State<SignUpPage> {
               TextFormField(
                 controller: _passwordController,
                 decoration: InputDecoration(
-                    labelText: 'Password',
-                    suffixIcon: IconButton(
-                        onPressed: () {
-                          togglePassword();
-                        },
-                        icon: Icon(isObscure
-                            ? Icons.remove_red_eye
-                            : Icons.visibility_off))),
+                  labelText: 'Password',
+                  suffixIcon: IconButton(
+                    onPressed: togglePassword,
+                    icon: Icon(
+                      isObscure
+                          ? Icons.remove_red_eye
+                          : Icons.visibility_off,
+                    ),
+                  ),
+                ),
                 obscureText: isObscure,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -126,14 +137,16 @@ class _SignUpPageState extends State<SignUpPage> {
               TextFormField(
                 controller: _confirmPasswordController,
                 decoration: InputDecoration(
-                    labelText: 'Confirm Password',
-                    suffixIcon: IconButton(
-                        onPressed: () {
-                          togglePasswordConfirmation();
-                        },
-                        icon: Icon(isObscureConfirmation
-                            ? Icons.remove_red_eye
-                            : Icons.visibility_off))),
+                  labelText: 'Confirm Password',
+                  suffixIcon: IconButton(
+                    onPressed: togglePasswordConfirmation,
+                    icon: Icon(
+                      isObscureConfirmation
+                          ? Icons.remove_red_eye
+                          : Icons.visibility_off,
+                    ),
+                  ),
+                ),
                 obscureText: isObscureConfirmation,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -147,8 +160,10 @@ class _SignUpPageState extends State<SignUpPage> {
               SizedBox(height: screenHeight * 0.04),
               ElevatedButton(
                 onPressed: _submitForm,
-                child: Text('Sign Up',
-                    style: TextStyle(fontSize: screenWidth * 0.045)),
+                child: Text(
+                  'Sign Up',
+                  style: TextStyle(fontSize: screenWidth * 0.045),
+                ),
               ),
             ],
           ),
